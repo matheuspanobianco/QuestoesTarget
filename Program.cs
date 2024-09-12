@@ -1,113 +1,86 @@
-﻿using System;
+using System;
 
 namespace Calculator
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Menu();
-        }
-        static void Menu()
-        {
-            Console.Clear();
+            Console.WriteLine("Escolha a opção:");
+            Console.WriteLine("Questão 1 - Verificar se o número pertence à sequência de Fibonacci");
+            Console.WriteLine("Questão 2 - Contar a letra 'a' em uma string");
+            Console.Write("Digite o número da opção desejada: ");
+            int opcao = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Bem vindo à Calculadora!");
-            Console.WriteLine("Opções:");
-            Console.WriteLine("1-Soma");
-            Console.WriteLine("2-Subtração");
-            Console.WriteLine("3-Divisão");
-            Console.WriteLine("4-Multiplicação");
-            Console.WriteLine("5-Sair");
-            Console.WriteLine("------------------------------");
-            Console.Write("Digite sua opção: ");
-            short opcao = short.Parse(Console.ReadLine());
-
-            switch (opcao)
+            if (opcao == 1)
             {
-                case 1: Soma(); break;
-                case 2: Subtracao(); break;
-                case 3: Divisao(); break;
-                case 4: Multiplicacao(); break;
-                case 5: System.Environment.Exit(0); break;
-                default:
-                    {
-                        Console.Write("Opção inválida! Tecle enter para voltar ao menu.");
-                        Console.ReadKey();
-                        Menu();
-                        break;
-                    }
+                VerificarFibonacci();
+            }
+            else if (opcao == 2)
+            {
+                ContarLetraA();
+            }
+            else
+            {
+                Console.WriteLine("Opção inválida.");
+            }
+        }
+
+        static void VerificarFibonacci()
+        {
+            Console.Write("Informe um número: ");
+            int numero = int.Parse(Console.ReadLine());
+
+            int a = 0, b = 1, temp;
+
+            bool pertence = false;
+
+            while (a <= numero)
+            {
+                if (a == numero)
+                {
+                    pertence = true;
+                    break;
+                }
+
+                temp = a;
+                a = b;
+                b = temp + b;
             }
 
+            if (pertence)
+            {
+                Console.WriteLine($"O número {numero} pertence à sequência de Fibonacci.");
+            }
+            else
+            {
+                Console.WriteLine($"O número {numero} não pertence à sequência de Fibonacci.");
+            }
+        }
 
-        }
-        static void Soma()
+        static void ContarLetraA()
         {
-            Console.Clear();
-            Console.WriteLine("A opção escolhida foi SOMA");
-            Console.WriteLine("");
-            Console.Write("Digite o primeiro valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.Write("Digite um segungo valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            Console.WriteLine("");
-            float soma = v1 + v2;
-            Console.WriteLine($"O resultado da soma é: {soma}");
-            Console.WriteLine("");
-            Console.WriteLine("Tecle 'enter' para recomeçar...");
-            Console.ReadKey();
-            Menu();
-        }
-        static void Subtracao()
-        {
-            Console.Clear();
-            Console.WriteLine("A opção escolhida foi SUBTRAÇÃO");
-            Console.WriteLine("");
-            Console.Write("Digite o primeiro valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.Write("Digite um segungo valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            Console.WriteLine("");
-            float sub = v1 - v2;
-            Console.WriteLine($"O resultado da subtração é: {sub}");
-            Console.WriteLine("");
-            Console.WriteLine("Tecle 'enter' para recomeçar...");
-            Console.ReadKey();
-            Menu();
-        }
-        static void Divisao()
-        {
-            Console.Clear();
-            Console.WriteLine("A opção escolhida foi DIVISÃO");
-            Console.WriteLine("");
-            Console.Write("Digite o primeiro valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.Write("Digite um segungo valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            Console.WriteLine("");
-            float div = v1 / v2;
-            Console.WriteLine($"O resultado da divisão é: {div}");
-            Console.WriteLine("");
-            Console.WriteLine("Tecle 'enter' para recomeçar...");
-            Console.ReadKey();
-            Menu();
-        }
-        static void Multiplicacao()
-        {
-            Console.Clear();
-            Console.WriteLine("A opção escolhida foi MULTIPLICAÇÃO");
-            Console.WriteLine("");
-            Console.Write("Digite o primeiro valor: ");
-            float v1 = float.Parse(Console.ReadLine());
-            Console.Write("Digite um segungo valor: ");
-            float v2 = float.Parse(Console.ReadLine());
-            Console.WriteLine("");
-            float mult = v1 * v2;
-            Console.WriteLine($"O resultado da multiplicação é: {mult}");
-            Console.WriteLine("");
-            Console.WriteLine("Tecle 'enter' para recomeçar...");
-            Console.ReadKey();
-            Menu();
+            Console.Write("Informe uma string: ");
+            string texto = Console.ReadLine();
+
+            int contador = 0;
+
+            foreach (char c in texto)
+            {
+                if (c == 'a' || c == 'A')
+                {
+                    contador++;
+                }
+            }
+
+            if (contador > 0)
+            {
+                Console.WriteLine($"A letra 'a' aparece {contador} vez(es) na string.");
+            }
+            else
+            {
+                Console.WriteLine("A letra 'a' não foi encontrada na string.");
+            }
         }
     }
 }
